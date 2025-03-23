@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View services</title>
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/vendor" rel="stylesheet" />
+    <link href="/vendor" rel="stylesheet" />
+    <link href="/css/style1.css" , rel="stylesheet" />
+  </head>
+
+  <body class="Services">
+    <video
+      class="bg-vid"
+      src="/images/mechanic.mp4"
+      autoplay
+      loop
+      muted
+      plays-inline
+    ></video>
+    <div class="container">
+      <div class="row bar">
+        <div class="col-lg-4">
+          <div
+            id="glass3"
+            class="side d-flex flex-column flex-shrink-0 p-3"
+            style="width: 280px"
+          >
+            <a
+              href="/"
+              class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+            >
+              <span class="fs-4 link-light">ADMIN</span>
+            </a>
+            <hr />
+            <ul class="nav nav-pills flex-column mb-auto">
+              <li class="nav-item">
+                <a
+                  href="/admin"
+                  class="nav-link link-light"
+                  aria-current="page"
+                >
+                  Home
+                </a>
+              </li>
+
+              <li>
+                <a href="/orders" class="nav-link link-light">appointments</a>
+              </li>
+              <li>
+                <a href="/Service" class="nav-link link-light">services</a>
+              </li>
+              <li>
+                <a href="/mechanic" class="nav-link link-light">mechanics</a>
+              </li>
+              <li>
+                <a href="/customers" class="nav-link link-light">Customers</a>
+              </li>
+            </ul>
+            <hr />
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <section id="glass4" class="section dashboard mt-4">
+            <h1 class="text-white">SERVICES</h1>
+            <div class="container mt-5">
+              <h2 class="text-white">Add New Service</h2>
+              <form action="/Service" method="post">
+                <div class="mb-3">
+                  <label for="serviceName" class="form-label text-white"
+                    >Service Name:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="serviceName"
+                    name="serviceName"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Availability:</label>
+                  <div>
+                    <input
+                      type="radio"
+                      id="serviceAvailable"
+                      name="serviceAvailability"
+                      value="true"
+                      checked
+                    />
+                    <label for="serviceAvailable">Available</label><br />
+                    <input
+                      type="radio"
+                      id="serviceNotAvailable"
+                      name="serviceAvailability"
+                      value="false"
+                    />
+                    <label for="serviceNotAvailable">Not Available</label>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-secondary">
+                  Add Service
+                </button>
+              </form>
+            </div>
+
+            <table class="table table-striped mt-3">
+              <thead>
+                <tr>
+                  <th>Service ID</th>
+                  <th>Service Name</th>
+                  <th>Availability</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% services.forEach((service)=> { %>
+                <tr>
+                  <td><%= service.service_id %></td>
+                  <td><%= service.service_name %></td>
+                  <td><%= service.service_availability ? 'Yes' : 'No' %></td>
+                </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

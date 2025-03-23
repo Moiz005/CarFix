@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+
+    <!-- <link href="../../public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../public/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../public/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../../public/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="../../public/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="../../public/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../../public/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/css/style1.css"> -->
+
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">  
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/vendor" rel="stylesheet">
+    <link href="/vendor" rel="stylesheet">
+    <link href="/css/style1.css" rel="stylesheet">
+</head>
+
+<body class="customer">
+    <!-- <video class="bg-vid" src="../../public/images/vid.mp4" autoplay loop muted plays-inline></video> -->
+    <video class="bg-vid" src="/images/mechanic.mp4" autoplay loop muted plays-inline></video>
+    <div class="container">
+        <div class="row bar">
+            <div class="col-lg-4">
+                <div id="glass" class="side d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                        <span class="fs-4 link-light">ADMIN</span>
+                      </a>
+                      <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="/admin" class="nav-link link-light" aria-current="page">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/orders" class="nav-link link-light">Appointments</a>
+                        </li>
+                        <li>
+                            <a href="/Service" class="nav-link link-light">Services</a>
+                        </li>
+                        <li>
+                            <a href="/mechanic" class="nav-link link-light">Mechanics</a>
+                        </li>
+                        <li>
+                            <a href="/customers" class="nav-link link-light">Customers</a>
+                        </li>
+                    </ul>
+                    <hr>
+                </div>
+            </div>
+            <div id="glass1" class="col-lg-8 text-white">
+                <section class="section dashboard">
+                    <h1>CUSTOMERS</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Customer ID</th>
+                                <th>Customer Name</th>
+                                <th>Car model</th>
+                                <th>Notes by Customers</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% customers.forEach((customer)=> { %>
+                                <tr>
+                                    <td>
+                                        <%= customer.id %>
+                                    </td>
+                                    <td>
+                                        <%= customer.name %>
+                                    </td>
+                                    <td>
+                                        <%= customer.car_model %>
+                                    </td>
+                                    <td>
+                                        <%= customer.notes %>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

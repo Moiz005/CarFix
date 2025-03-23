@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders Page</title>
+    
+    <!-- <link href="../../public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../public/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../public/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../../public/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="../../public/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="../../public/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../../public/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/css/style1.css"> -->
+
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">  
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/vendor" rel="stylesheet">
+    <link href="/vendor" rel="stylesheet">
+    
+    <link href="/css/style1.css" rel="stylesheet">
+    <style>
+        .table1 {
+            background-color: transparent !important;
+        }
+    </style>
+</head>
+<body class="order">
+    <video class="bg-vid" src="/images/mechanic.mp4" autoplay loop muted plays-inline></video>
+    <div class="container">
+        <div class="row bar">
+            <div class="col-lg-4">
+                <div id="glass3" class="side d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                        <span class="fs-4 link-light">ADMIN</span>
+                      </a>
+                      <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="/admin" class="nav-link link-light" aria-current="page">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/orders" class="nav-link link-light">Appointments</a>   
+                        </li>
+                        <li>
+                            <a href="/Service" class="nav-link link-light">Services</a>   
+                        </li>
+                        <li>
+                            <a href="/mechanic" class="nav-link link-light">Mechanics</a>   
+                        </li>
+                        <li>
+                            <a href="/customers" class="nav-link link-light">Customers</a>
+                        </li>
+                    </ul>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <section class="section dashboard">
+                    <h1 class="text-white">Appointments</h1>
+
+                    
+                    <table id="glass5">
+                        <thead>
+                                    <tr>
+                                        <th>Booking ID</th>
+                                        <th>Customer Name</th>
+                                        <th>Appointment Date</th>
+                                        <th>Appointment Time</th>
+                                        <th>Mechanic</th> <!-- New column for mechanic -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% orders.forEach((order) => { %>
+                                        <tr>
+                                            <td><%= order.id %></td>
+                                            <td><%= order.owner_name %></td>
+                                            <td><%= new Date(order.appointment_date).toLocaleDateString() %></td>
+                                            <td><%= new Date(order.appointment_date).toLocaleTimeString() %></td>
+                                            <td>
+                                                <!-- Form for assigning a mechanic to an order -->
+                                                <form id="mechanicForm<%= order.id %>" action="/assign-mechanic" method="post">
+                                                    <input type="hidden" name="order_id" value="<%= order.id %>">
+                                                    <!-- Dropdown menu for selecting the mechanic -->
+                                                    <select name="mechanic_id" class="form-control">
+                                                        <% mechanics.forEach((mechanic) => { %>
+                                                            <option value="<%= mechanic.mechanic_id %>"><%= mechanic.name %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                    <button type="submit" class="btn btn-primary btn-sm">Assign</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    <% }); %>
+                                </tbody>
+                    </table>      
+                </section>
+            </div>
+</body>
+</html>
+

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechanics Page</title>
+
+    <!-- <link href="../../public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../public/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../public/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../../public/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="../../public/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="../../public/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../../public/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/css/style1.css"> -->
+
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">  
+  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendor" rel="stylesheet">
+  <link href="/vendor" rel="stylesheet">
+  <link href="/css/style1.css", rel="stylesheet" >
+</head>
+
+<body class="order">
+    <video class="bg-vid" src="/images/mechanic.mp4" autoplay loop muted plays-inline></video>
+    <div class="container">
+        <div class="row bar">
+            <div class="col-lg-4">
+                <div id="glass" class="side d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+                    <a href="/"
+                        class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                        <span class="fs-4 link-light">ADMIN</span>
+                    </a>
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="/admin" class="nav-link link-light" aria-current="page">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/orders" class="nav-link link-light">Appointments</a>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Service" class="nav-link link-light">Services</a>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/mechanic" class="nav-link link-light">Mechanics</a>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/customers" class="nav-link link-light">Customers</a>
+                        </li>
+
+                    </ul>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <section class="section dashboard">
+                    <div id="glass1" class="mt-4">
+                        <h1 class="text-white">MECHANICS</h1>
+                        <div class="container mt-3 text-white">
+                            <h2 class="text-white">Add New Mechanic</h2>
+                            <form action="/add-mechanic" method="post">
+                                <div class="mb-3">
+                                    <label for="mechanicName" class="form-label text-white">Mechanic Name:</label>
+                                    <input type="text" class="form-control" id="mechanicName" name="mechanicName"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="serviceName" class="form-label">Service Name:</label>
+                                    <input type="text" class="form-control" id="serviceName" name="serviceName">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Availability:</label>
+                                    <div>
+                                        <input type="radio" id="available" name="availability" value="true" checked>
+                                        <label for="available">Available</label><br>
+                                        <input type="radio" id="notAvailable" name="availability" value="false">
+                                        <label for="notAvailable">Not Available</label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-secondary">Add Mechanic</button>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <table class="table table-striped mt-3">
+                        <thead>
+                            <tr>
+                                <th>Mechanic ID</th>
+                                <th>Mechanic Name</th>
+                                <th>Service Type</th>
+                                <th>Availability</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% mechanic.forEach((mechanic)=> { %>
+                                <tr>
+                                    <td>
+                                        <%= mechanic.mechanic_id %>
+                                    </td>
+                                    <td>
+                                        <%= mechanic.name %>
+                                    </td>
+                                    <td>
+                                        <%= mechanic.type %>
+                                    </td>
+                                    <td>
+                                        <%= mechanic.availability ? 'Yes' : 'No' %>
+                                    </td>
+                                    <td>
+
+                                        <form action="/mechanics/drop/<%= mechanic.mechanic_id %>" method="post">
+                                            <button type="submit" class="btn btn-danger">Drop</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

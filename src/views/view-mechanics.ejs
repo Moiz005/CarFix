@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mechanics</title>
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/vendor/simple-datatables/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body class="mechanic-page">
+    <video
+      class="bg-vid"
+      src="/images/mechanic.mp4"
+      autoplay
+      loop
+      muted
+      plays-inline
+    ></video>
+    <div class="container mt-5">
+      <h1 class="text-center text-white mb-4">Available Mechanics</h1>
+      <div class="row">
+        <% if (mechanics.length > 0) { %> <% mechanics.forEach(mechanic => { %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 bg-dark text-white">
+            <div class="card-body">
+              <h5 class="card-title"><%= mechanic.name %></h5>
+              <p class="card-text">
+                <strong>Location:</strong> <%= mechanic.location || 'N/A' %><br />
+                <strong>Skills:</strong> <%= mechanic.skills || 'General
+                Repairs' %><br />
+                <strong>Rating:</strong>
+                <% for(let i = 1; i <= 5; i++) { %>
+                <i
+                  class="bi <%= i <= mechanic.rating ? 'bi-star-fill' : 'bi-star' %>"
+                ></i>
+                <% } %> (<%= mechanic.rating || 'N/A' %>)
+              </p>
+              <a
+                href="/view-mechanic/<%= mechanic.mechanic_id %>"
+                class="btn btn-primary"
+                >View Details</a
+              >
+            </div>
+          </div>
+        </div>
+        <% }) %> <% } else { %>
+        <div class="col-12">
+          <p class="text-center text-white">
+            No mechanics available at this time.
+          </p>
+        </div>
+        <% } %>
+      </div>
+      <div class="text-center mt-4">
+        <a href="/user-home" class="btn btn-secondary">Back to Dashboard</a>
+      </div>
+    </div>
+
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

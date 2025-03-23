@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Mechanic Booking System</title>
+    <!-- <link rel="stylesheet" href="./public/css/bootstrap.min.css"> -->
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">  
+  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendor/simple-datatables/style.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <video class="bg-vid" src="/images/car.mp4" autoplay loop muted plays-inline></video>
+    <section id="navbar">
+        <div class="nav">
+            <div>
+                <img src="/images/logo.png" alt="Logo" class="logo">
+            </div>
+            <div class="mid">
+                <h2>Mechanic Booking System</h2>
+            </div>
+            <div class="right"></div>
+        </div>
+    </section>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col text-center text-light">
+                <h1>BOOKING ADMINISTRATOR SYSTEM</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 mx-auto">
+                <div id="glass1" class="card mt-5 py-5">
+                    <div class="card-body text-body-secondary">
+                        <h2 class="card-title text-center mb-5 text-white-50">FILL THE FORM TO CREATE A NEW APPOINTMENT</h2>
+                        <form class="p-0" method="POST" action="/create-appointment">
+                            <div class="form-group row px-3 mb-3">
+                                <label class="col-sm-4 col-lg-2 col-form-label text-white-50">Owner</label>
+                                <div class="col-sm-8 col-lg-10">
+                                    <input type="text" class="form-control bg-light px-4 py-2 border-0" placeholder="Name" name="owner" value="" data-last-active-input="" required>
+                                </div>
+                            </div>
+                            <div class="form-group row px-3 mb-3">
+                                <label class="col-sm-4 col-lg-2 col-form-label text-white-50">Brand / Model</label>
+                                <div class="col-sm-8 col-lg-10">
+                                    <input type="text" class="form-control bg-light px-4 py-2 border-0" placeholder="Brand" name="brand" value="" data-last-active-input="" required>
+                                </div>
+                            </div>
+                            <div class="form-group row px-3 mb-3">
+                                <label class="col-sm-4 col-lg-2 col-form-label text-white-50">Plate Number</label>
+                                <div class="col-sm-8 col-lg-10">
+                                    <input type="text" class="form-control bg-light px-4 py-2 border-0" placeholder="Plate Number" name="plate" value="" data-last-active-input=""required>
+                                </div>
+                            </div>
+                            <div class="form-group row px-3 mb-3">
+                                <label class="col-sm-4 col-lg-2 col-form-label text-white-50">Date</label>
+                                <div class="col-sm-8 col-lg-4">
+                                    <input type="date" class="form-control bg-light px-4 py-2 border-0" name="date" value=""required>
+                                </div>
+                                <label class="col-sm-4 col-lg-2 col-form-label text-white-50">Time</label>
+                                <div class="col-sm-8 col-lg-4">
+                                    <input type="time" class="form-control bg-light px-4 py-2 border-0" placeholder="time" name="time" value="" required>
+                                </div>
+                            </div>
+                            <div class="form-group row px-3">
+                                <label class="col-sm-4 col-lg-2 col-form-label text-white-50">Issues Description</label>
+                                <div class="col-sm-8 col-lg-10">
+                                    <textarea class="form-control bg-light px-4 py-2 border-0" name="issue" placeholder="Describe Issue"></textarea>
+                                </div>
+                            </div>
+                            <input type="submit" class="fl fl-btn p-2 btn btn-dark btn-block"
+                                value="Add New Appointment">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

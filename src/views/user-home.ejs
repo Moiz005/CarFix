@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body class="dashboard-page">
+    <video
+      class="bg-vid"
+      src="/images/car.mp4"
+      autoplay
+      loop
+      muted
+      plays-inline
+    ></video>
+
+    <!-- Navigation Bar -->
+    <nav class="nav navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="/user-home">Auto Service</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/user-home"
+                ><i class="bi bi-house-door"></i> Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/book-appointments"
+                ><i class="bi bi-calendar-plus"></i> Book Appointment</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/profile"
+                ><i class="bi bi-person"></i> My Profile</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/view-mechanics"
+                ><i class="bi bi-person"></i> View Mechanics</a
+              >
+            </li>
+          </ul>
+          <div class="d-flex">
+            <a href="/logout" class="btn btn-outline-light btn-sm"
+              ><i class="bi bi-box-arrow-right"></i> Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <h1 class="text-center mb-4">Welcome to Your Dashboard</h1>
+
+      <!-- Current Appointments Card -->
+      <div class="row mb-4">
+        <div class="col-md-6 offset-md-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">Current Appointments</h5>
+              <p class="card-text display-4"><%= currentAppointments %></p>
+              <p class="text-muted">Pending or Confirmed Bookings</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Appointment History -->
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <h3 class="mb-3">Appointment History</h3>
+          <% if (appointmentHistory.length > 0) { %>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Mechanic</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% appointmentHistory.forEach(booking => { %>
+              <tr>
+                <td>
+                  <%= new Date(booking.booking_date_time).toLocaleDateString()
+                  %>
+                </td>
+                <td><%= booking.mechanic_name || 'N/A' %></td>
+                <td><%= booking.status %></td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+          <% } else { %>
+          <p class="text-center">No appointment history yet.</p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS (required for navbar toggle functionality) -->
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

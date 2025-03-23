@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      .user-fields {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body class="register-page">
+    <video
+      class="bg-vid"
+      src="/images/mechanic.mp4"
+      autoplay
+      loop
+      muted
+      plays-inline
+    ></video>
+    <div class="container">
+      <main id="glass2" class="form-signin w-25 h-100 m-auto p-3 pt-4">
+        <div class="back-btn d-flex">
+          <a href="/" class="btn btn-outline-light btn-sm"
+            ><i class="bi bi-box-arrow-right"></i> back</a
+          >
+        </div>
+        <form method="POST" action="/register">
+          <h1 class="h3 mb-3 fw-normal text-center">Register</h1>
+
+          <div class="form-floating m-2">
+            <input
+              type="email"
+              class="form-control"
+              id="floatingEmail"
+              name="email"
+              placeholder="Email"
+              required
+            />
+            <label for="floatingEmail">Email</label>
+          </div>
+
+          <div class="form-floating m-2">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingName"
+              name="name"
+              placeholder="Name"
+              required
+            />
+            <label for="floatingName">Name</label>
+          </div>
+
+          <div class="form-floating m-2">
+            <input
+              type="tel"
+              class="form-control"
+              id="floatingPhone"
+              name="phone_number"
+              placeholder="Phone Number"
+              required
+            />
+            <label for="floatingPhone">Phone Number</label>
+          </div>
+
+          <div class="form-floating m-2">
+            <input
+              type="password"
+              class="form-control"
+              id="floatingPassword"
+              name="password"
+              placeholder="Password"
+              required
+            />
+            <label for="floatingPassword">Password</label>
+          </div>
+
+          <div class="form-floating m-2">
+            <input
+              type="password"
+              class="form-control"
+              id="floatingConfirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              required
+            />
+            <label for="floatingConfirmPassword">Confirm Password</label>
+          </div>
+
+          <!-- User-specific fields (hidden by default) -->
+          <div class="user-fields">
+            <div class="form-floating m-2">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingMake"
+                name="make"
+                placeholder="Car Make"
+              />
+              <label for="floatingMake">Car Make (e.g., Toyota)</label>
+            </div>
+
+            <div class="form-floating m-2">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingModel"
+                name="model"
+                placeholder="Car Model"
+              />
+              <label for="floatingModel">Car Model (e.g., Corolla)</label>
+            </div>
+
+            <div class="form-floating m-2">
+              <input
+                type="number"
+                class="form-control"
+                id="floatingYear"
+                name="year"
+                placeholder="Car Year"
+                min="1900"
+                max="2025"
+              />
+              <label for="floatingYear">Car Year (e.g., 2020)</label>
+            </div>
+          </div>
+
+          <div class="form-check text-start my-3">
+            <input
+              class="form-check-input"
+              type="radio"
+              value="admin"
+              id="adminRadio"
+              name="role"
+              required
+              onclick="toggleFields('admin')"
+            />
+            <label class="form-check-label" for="adminRadio">Admin</label>
+          </div>
+
+          <div class="form-check text-start my-3">
+            <input
+              class="form-check-input"
+              type="radio"
+              value="user"
+              id="userRadio"
+              name="role"
+              required
+              onclick="toggleFields('user')"
+            />
+            <label class="form-check-label" for="userRadio">User</label>
+          </div>
+
+          <button class="btn btn-dark w-100 py-2" type="submit">
+            Register
+          </button>
+          <p class="mt-5 mb-3 text-body-white">© 2024–2028</p>
+        </form>
+      </main>
+    </div>
+
+    <script>
+      function toggleFields(role) {
+        const userFields = document.querySelector(".user-fields");
+        const makeInput = document.getElementById("floatingMake");
+        const modelInput = document.getElementById("floatingModel");
+        const yearInput = document.getElementById("floatingYear");
+
+        userFields.style.display = role === "user" ? "block" : "none";
+      }
+    </script>
+  </body>
+</html>

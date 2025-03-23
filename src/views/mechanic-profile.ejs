@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mechanic Profile - <%= mechanic.name %></title>
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/vendor/simple-datatables/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body class="mechanic-profile-page">
+    <video
+      class="bg-vid"
+      src="/images/mechanic.mp4"
+      autoplay
+      loop
+      muted
+      plays-inline
+    ></video>
+    <div class="container mt-5">
+      <h1 class="text-center text-white mb-4"><%= mechanic.name %>'s Profile</h1>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card bg-dark text-white">
+            <div class="card-body">
+              <h5 class="card-title">Basic Information</h5>
+              <p>
+                <strong>Location:</strong> <%= mechanic.location || 'N/A' %><br />
+                <strong>Skills:</strong> <%= mechanic.skills || 'General Repairs' %><br />
+                <strong>Rating:</strong> 
+                <% for(let i = 1; i <= 5; i++) { %>
+                  <i class="bi <%= i <= mechanic.rating ? 'bi-star-fill' : 'bi-star' %>"></i>
+                <% } %> (<%= mechanic.rating || 'N/A' %>)
+              </p>
+
+              <h5 class="mt-4">Experience & Qualifications</h5>
+              <p>
+                <strong>Years of Experience:</strong> <%= mechanic.experience_years || 'N/A' %> years<br />
+                <strong>Certifications:</strong>
+                <% if (certifications.length > 0) { %>
+                  <ul>
+                    <% certifications.forEach(cert => { %>
+                      <li><%= cert.certification_name %> (Issued: <%= new Date(cert.issued_date).toLocaleDateString() %>)</li>
+                    <% }) %>
+                  </ul>
+                <% } else { %>
+                  None listed
+                <% } %>
+              </p>
+
+              <h5 class="mt-4">Customer Reviews</h5>
+              <% if (reviews.length > 0) { %>
+                <ul class="list-group">
+                  <% reviews.forEach(review => { %>
+                    <li class="list-group-item bg-secondary text-white">
+                      <strong><%= review.review_text %></strong><br />
+                      <small>Posted on <%= new Date(review.created_at).toLocaleDateString() %></small>
+                    </li>
+                  <% }) %>
+                </ul>
+              <% } else { %>
+                <p>No reviews yet.</p>
+              <% } %>
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <a href="/mechanic" class="btn btn-secondary">Back to Mechanics List</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,237 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+  height: 100vh;
+}
+.bg-vid {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: -3;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+.login-page {
+  margin: 0px;
+  padding: 0px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.appointment-successful-page {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.nav {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
+  color: white;
+}
+.logo {
+  height: 100px;
+}
+.mid {
+  padding-left: 10px;
+}
+.right {
+  display: flex;
+  gap: 1em;
+}
+.right li,
+.right li a {
+  list-style: none;
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: white;
+}
+.right li {
+  width: 10rem;
+}
+.right li a:hover {
+  color: white;
+  background-color: black;
+  border-radius: 4px;
+  padding: 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.glass {
+  text-align: center;
+  color: azure;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  height: 15rem;
+}
+#glass1 {
+  color: azure;
+  padding: 10px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  height: 34rem;
+}
+#glass2 {
+  color: azure;
+  padding: 10px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  width: 50em !important;
+  margin: 1em;
+}
+.fl {
+  margin: 22rem;
+}
+.fl-btn {
+  margin-top: 2rem;
+}
+.form-floating > label {
+  color: black;
+}
+.new-account-link {
+  text-align: center;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-page {
+  margin: 0px;
+  padding: 2em;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dashboard-page {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-page .nav {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.nav-link {
+  background: linear-gradient(
+    to right,
+    #ec4899,
+    /* pink-500 */ #8b5cf6,
+    /* violet-500 */ #3b82f6 /* blue-500 */
+  );
+  background: linear-gradient(to right, #d10000, #ffd700, #d10000);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% 100%;
+  animation: gradient-shift 8s ease infinite;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: azure;
+}
+
+.navbar-brand {
+  background: linear-gradient(to right, #d10000, #ffd700, #d10000);
+  background-clip: text;
+  color: transparent;
+  background-size: 200% 100%;
+}
+
+.navbar-brand:hover {
+  color: transparent;
+}
+
+/* Gradient animation */
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.dashboard-page > .container {
+  text-align: center;
+  color: azure;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1em 0em;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}

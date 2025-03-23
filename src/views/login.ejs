@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body class="login-page">
+    <video
+      class="bg-vid"
+      src="/images/mechanic.mp4"
+      autoplay
+      loop
+      muted
+      plays-inline
+    ></video>
+    <div class="container">
+      <main id="glass2" class="form-signin w-25 h-100 m-auto p-3 pt-4">
+        <form class="login-form" method="POST" action="/login">
+          <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
+          <div class="form-floating m-2">
+            <input
+              type="email"
+              class="form-control"
+              id="floatingEmail"
+              name="email"
+              placeholder="Email"
+              required
+            />
+            <label for="floatingEmail">Email</label>
+          </div>
+          <div class="form-floating m-2">
+            <input
+              type="password"
+              class="form-control"
+              id="floatingPassword"
+              name="password"
+              placeholder="Password"
+              required
+            />
+            <label for="floatingPassword">Password</label>
+          </div>
+          <div>
+            <div class="form-check text-start my-3">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="admin"
+                id="adminRadio"
+                name="role"
+                required
+              />
+              <label class="form-check-label" for="adminRadio">Admin</label>
+            </div>
+            <div class="form-check text-start my-3">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="user"
+                id="userRadio"
+                name="role"
+                required
+              />
+              <label class="form-check-label" for="userRadio">User</label>
+            </div>
+            <div class="form-check text-start my-3">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="mechanic"
+                id="mechanicRadio"
+                name="role"
+                required
+              />
+              <label class="form-check-label" for="mechanicRadio"
+                >Mechanic</label
+              >
+            </div>
+          </div>
+          <div class="form-check text-start my-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value="remember-me"
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Remember me
+            </label>
+          </div>
+          <button class="btn btn-dark w-100 py-2" type="submit">Sign in</button>
+          <a href="/register" class="new-account-link w-100"
+            >Create a new account?</a
+          >
+          <p class="mt-5 mb-3 text-body-white">© 2025–2029</p>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>

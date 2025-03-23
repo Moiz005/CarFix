@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book an Appointment - Mechanic Booking System</title>
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <video
+      class="bg-vid"
+      src="/images/car.mp4"
+      autoplay
+      loop
+      muted
+      plays-inline
+    ></video>
+    <section id="navbar">
+      <div class="nav">
+        <div>
+          <img src="/images/logo.png" alt="Logo" class="logo" />
+        </div>
+        <div class="mid">
+          <h2>Mechanic Booking System</h2>
+        </div>
+        <div class="right">
+          <a href="/user-home" class="btn btn-outline-light btn-sm"
+            >Back to Dashboard</a
+          >
+          <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
+        </div>
+      </div>
+    </section>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col text-center text-light">
+          <h1>BOOK AN APPOINTMENT</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+          <div id="glass1" class="card mt-5 py-5">
+            <div class="card-body text-body-secondary">
+              <h2 class="card-title text-center mb-5 text-white-50">
+                FILL THE FORM TO CREATE A NEW APPOINTMENT
+              </h2>
+              <form class="p-0" method="POST" action="/book-appointments">
+                <div class="form-group row px-3 mb-3">
+                  <label class="col-sm-4 col-lg-2 col-form-label text-white-50"
+                    >Mechanic</label
+                  >
+                  <div class="col-sm-8 col-lg-10">
+                    <select
+                      class="form-control bg-light px-4 py-2 border-0"
+                      name="mechanic_id"
+                      required
+                    >
+                      <option value="">Select a mechanic...</option>
+                      <% mechanics.forEach(mechanic => { %>
+                      <option value="<%= mechanic.mechanic_id %>">
+                        <%= mechanic.name %> (<%= mechanic.location %>)
+                      </option>
+                      <% }) %>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row px-3 mb-3">
+                  <label class="col-sm-4 col-lg-2 col-form-label text-white-50"
+                    >Service</label
+                  >
+                  <div class="col-sm-8 col-lg-10">
+                    <select
+                      class="form-control bg-light px-4 py-2 border-0"
+                      name="service_id"
+                    >
+                      <option value="">Select a service...</option>
+                      <% services.forEach(service => { %>
+                      <option value="<%= service.service_id %>">
+                        <%= service.service_name %> - <%= service.service_type
+                        %> ($<%= service.estimated_cost %>)
+                      </option>
+                      <% }) %>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row px-3 mb-3">
+                  <label class="col-sm-4 col-lg-2 col-form-label text-white-50"
+                    >Your Car</label
+                  >
+                  <div class="col-sm-8 col-lg-10">
+                    <select
+                      class="form-control bg-light px-4 py-2 border-0"
+                      name="car_id"
+                      required
+                    >
+                      <option value="">Select a car...</option>
+                      <% cars.forEach(car => { %>
+                      <option value="<%= car.car_id %>">
+                        <%= car.make %> <%= car.model %> (<%= car.year %>)
+                      </option>
+                      <% }) %>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row px-3 mb-3">
+                  <label class="col-sm-4 col-lg-2 col-form-label text-white-50"
+                    >Date & Time</label
+                  >
+                  <div class="col-sm-8 col-lg-10">
+                    <input
+                      type="datetime-local"
+                      class="form-control bg-light px-4 py-2 border-0"
+                      name="booking_date_time"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="text-center">
+                  <input
+                    type="submit"
+                    class="fl fl-btn p-2 btn btn-dark btn-block"
+                    value="Book Appointment"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

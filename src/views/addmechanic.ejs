@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Mechanic</title>
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/vendor/simple-datatables/style.css" rel="stylesheet" />
+    <link href="/css/style1.css" rel="stylesheet" />
+  </head>
+
+  <body class="add-mechanic-page">
+    <video
+      class="bg-vid"
+      src="/images/mechanic.mp4"
+      autoplay
+      loop
+      muted
+      plays-inline
+    ></video>
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 col-md-4">
+          <div
+            id="glass"
+            class="side d-flex flex-column flex-shrink-0 p-3"
+            style="min-height: 100vh; width: 280px"
+          >
+            <a
+              href="/"
+              class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+            >
+              <span class="fs-4 link-light">ADMIN</span>
+            </a>
+            <hr class="text-white" />
+            <ul class="nav nav-pills flex-column mb-auto">
+              <li class="nav-item">
+                <a href="/admin" class="nav-link link-light">
+                  <i class="bi bi-house-door me-2"></i>Home
+                </a>
+              </li>
+              <li>
+                <a href="/orders" class="nav-link link-light">
+                  <i class="bi bi-calendar-check me-2"></i>Appointments
+                </a>
+              </li>
+              <li>
+                <a href="/Service" class="nav-link link-light">
+                  <i class="bi bi-tools me-2"></i>Services
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/mechanic"
+                  class="nav-link link-light active"
+                  aria-current="page"
+                >
+                  <i class="bi bi-person-gear me-2"></i>Mechanics
+                </a>
+              </li>
+              <li>
+                <a href="/customers" class="nav-link link-light">
+                  <i class="bi bi-people me-2"></i>Customers
+                </a>
+              </li>
+            </ul>
+            <hr class="text-white" />
+            <div class="dropdown">
+              <a
+                href="#"
+                class="d-flex align-items-center link-light text-decoration-none dropdown-toggle"
+                id="dropdownUser2"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="bi bi-person-circle me-2"></i>Admin
+              </a>
+              <ul
+                class="dropdown-menu text-small shadow"
+                aria-labelledby="dropdownUser2"
+              >
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-9 col-md-8 p-4">
+          <div id="glass1" class="p-4 rounded">
+            <h1 class="text-white mb-4">Add New Mechanic</h1>
+            <form action="/add-mechanic" method="post">
+              <div class="row">
+                <!-- Name -->
+                <div class="col-md-6 mb-3">
+                  <label for="name" class="form-label text-white">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    placeholder="Enter mechanic's name"
+                    required
+                  />
+                </div>
+                <!-- Email -->
+                <div class="col-md-6 mb-3">
+                  <label for="email" class="form-label text-white">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Enter mechanic's email"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="row">
+                <!-- Phone Number -->
+                <div class="col-md-6 mb-3">
+                  <label for="phone_number" class="form-label text-white"
+                    >Phone Number</label
+                  >
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="phone_number"
+                    name="phone_number"
+                    placeholder="Enter phone number"
+                    pattern="[0-9]{10}"
+                    required
+                  />
+                  <small class="text-white">Format: 1234567890</small>
+                </div>
+                <!-- Location -->
+                <div class="col-md-6 mb-3">
+                  <label for="location" class="form-label text-white"
+                    >Location</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="location"
+                    name="location"
+                    placeholder="Enter location"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="row">
+                <!-- Experience Years -->
+                <div class="col-md-6 mb-3">
+                  <label for="experience_years" class="form-label text-white"
+                    >Years of Experience</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="experience_years"
+                    name="experience_years"
+                    min="0"
+                    placeholder="Enter years of experience"
+                    required
+                  />
+                </div>
+                <!-- Password -->
+                <div class="col-md-6 mb-3">
+                  <label for="password" class="form-label text-white"
+                    >Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    name="password"
+                    placeholder="Enter default password"
+                    required
+                  />
+                  <small class="text-white"
+                    >Mechanic can change this later</small
+                  >
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="mt-4">
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-person-plus me-2"></i>Add Mechanic
+                </button>
+                <a href="/mechanic" class="btn btn-secondary ms-2">
+                  <i class="bi bi-arrow-left me-2"></i>Back to Mechanics
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

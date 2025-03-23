@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/vendor/simple-datatables/style.css" rel="stylesheet" />
+    <link href="/css/style1.css" rel="stylesheet" />
+  </head>
+
+  <body class="admin-page">
+    <video
+      class="bg-vid"
+      src="/images/mechanic.mp4"
+      autoplay
+      loop
+      muted
+      plays-inline
+    ></video>
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 col-md-4">
+          <div
+            id="glass"
+            class="side d-flex flex-column flex-shrink-0 p-3"
+            style="min-height: 100vh; width: 280px"
+          >
+            <a
+              href="/"
+              class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+            >
+              <span class="fs-4 link-light">ADMIN</span>
+            </a>
+            <hr class="text-white" />
+            <ul class="nav nav-pills flex-column mb-auto">
+              <li class="nav-item">
+                <a
+                  href="/admin"
+                  class="nav-link link-light active"
+                  aria-current="page"
+                >
+                  <i class="bi bi-house-door me-2"></i>Home
+                </a>
+              </li>
+              <li>
+                <a href="/orders" class="nav-link link-light">
+                  <i class="bi bi-calendar-check me-2"></i>Appointments
+                </a>
+              </li>
+              <li>
+                <a href="/Service" class="nav-link link-light">
+                  <i class="bi bi-tools me-2"></i>Services
+                </a>
+              </li>
+              <li>
+                <a href="/mechanic" class="nav-link link-light">
+                  <i class="bi bi-person-gear me-2"></i>Mechanics
+                </a>
+              </li>
+              <li>
+                <a href="/customers" class="nav-link link-light">
+                  <i class="bi bi-people me-2"></i>Customers
+                </a>
+              </li>
+            </ul>
+            <hr class="text-white" />
+            <div class="dropdown">
+              <a
+                href="#"
+                class="d-flex align-items-center link-light text-decoration-none dropdown-toggle"
+                id="dropdownUser2"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="bi bi-person-circle me-2"></i>Admin
+              </a>
+              <ul
+                class="dropdown-menu text-small shadow"
+                aria-labelledby="dropdownUser2"
+              >
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-9 col-md-8 p-4">
+          <div id="glass1" class="p-4 rounded">
+            <h1 class="text-white mb-4">Admin Dashboard</h1>
+
+            <!-- Overview Statistics -->
+            <div class="row mb-4">
+              <div class="col-md-3">
+                <div class="card bg-dark text-white">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">Total Customers</h5>
+                    <p class="card-text fs-3"><%= stats.totalCustomers %></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card bg-dark text-white">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">Total Mechanics</h5>
+                    <p class="card-text fs-3"><%= stats.totalMechanics %></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card bg-dark text-white">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">Pending Appointments</h5>
+                    <p class="card-text fs-3">
+                      <%= stats.pendingAppointments %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card bg-dark text-white">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">Total Services</h5>
+                    <p class="card-text fs-3"><%= stats.totalServices %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="row">
+              <div class="col-12">
+                <h4 class="text-white mb-3">Recent Appointments</h4>
+                <div class="table-responsive">
+                  <table class="table table-dark table-striped">
+                    <thead>
+                      <tr>
+                        <th>Booking ID</th>
+                        <th>Customer</th>
+                        <th>Mechanic</th>
+                        <th>Date/Time</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% recentAppointments.forEach(appointment => { %>
+                      <tr>
+                        <td><%= appointment.booking_id %></td>
+                        <td><%= appointment.customer_name || 'N/A' %></td>
+                        <td>
+                          <%= appointment.mechanic_name || 'Unassigned' %>
+                        </td>
+                        <td>
+                          <%= new
+                          Date(appointment.booking_date_time).toLocaleString()
+                          %>
+                        </td>
+                        <td><%= appointment.status %></td>
+                      </tr>
+                      <% }) %> <% if (recentAppointments.length === 0) { %>
+                      <tr>
+                        <td colspan="5" class="text-center">
+                          No recent appointments
+                        </td>
+                      </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
