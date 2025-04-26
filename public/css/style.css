@@ -41,6 +41,33 @@ body {
   padding-right: 20px;
   color: white;
 }
+
+.user-profile-page {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+    align-items: center;
+}
+
+.user-profile-page nav {
+  display: flex;
+  align-items: center;
+  position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 0em 3em;
+}
+
 .logo {
   height: 100px;
 }
@@ -234,4 +261,119 @@ body {
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.view-mechanic-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.view-mechanic-card {
+  color: azure;
+  padding: 1em;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.profile-form {
+  position: relative;
+    width: 30em;
+    margin: 1em 0px;
+    padding: 30px;
+    border-radius: 15px;
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.2),
+        /* Slightly more opaque white */
+        rgba(255, 255, 255, 0.05)
+        /* More transparent */
+      );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.profile-container {
+  position: relative;
+  width: 30em;
+  margin: 1em 0px;
+  padding: 30px;
+  border-radius: 15px;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.2),
+      /* Slightly more opaque white */
+      rgba(255, 255, 255, 0.05)
+      /* More transparent */
+    );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  color: white;
+  /* Text color inside the glass */
+}
+
+.profile-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: white;
+}
+
+.profile-container label {
+  font-weight: bold;
+  color: white;
+  /* Ensure labels are visible */
+}
+
+.profile-container .form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  /* Slightly visible input background */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  /* Input text color */
+}
+
+.profile-container .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.profile-container .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: white;
+  box-shadow: none;
+  /* Remove default bootstrap focus shadow */
+}
+
+.profile-container .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+}
+
+.profile-container .btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  text-decoration: none;
+  /* Remove underline from link styled as button */
+  display: block;
+  /* Make link take full width */
+  text-align: center;
+  /* Center text */
 }

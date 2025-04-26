@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - AutoFix Hub</title>
+    <!-- Add Bootstrap CSS (assuming you might use it for styling forms/layout) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Link your custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="user-profile-page"> <!-- Use dashboard-page for background video -->
+    <video
+      class="bg-vid"
+      src="/images/car.mp4"
+      autoplay
+      loop
+      muted
+      plays-inline
+    ></video>
+
+    <!-- Simple Navigation (Adapt or include your nav partial if you have one) -->
+    <nav class="nav">
+        <div class="mid">
+            <a class="navbar-brand" href="/user-home">
+                CarFix
+            </a>
+        </div>
+        <ul class="right">
+            <a class="btn btn-outline-light btn-sm my-2" href="/user-home">Back to Dashboard</a>
+        </ul>
+    </nav>
+
+    <div class="profile-form">
+        <h2>My Profile</h2>
+
+        <% if (typeof message !== 'undefined' && message) { %>
+            <div class="alert <%= message.includes('successfully') ? 'alert-success' : 'alert-danger' %>" role="alert">
+                <%= message %>
+            </div>
+        <% } %>
+
+
+        <% if (typeof user !== 'undefined') { %>
+            <form action="/user-profile/update" method="POST">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" value="<%= user.name %>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone_number" name="phone_number" value="<%= user.phone_number %>" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update Profile</button>
+                 <a href="/user-home" class="btn btn-secondary">Back to Dashboard</a>
+            </form>
+        <% } else { %>
+            <p class="text-danger">Could not load user profile data.</p>
+            <a href="/user-home" class="btn btn-secondary">Back to Dashboard</a>
+        <% } %>
+    </div>
+
+    <!-- Optional: Add Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

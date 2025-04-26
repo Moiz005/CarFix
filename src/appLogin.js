@@ -225,6 +225,23 @@ appLogin.get("/user-home", isAuthenticated, (req, res) => {
   });
 });
 
+appLogin.get("/view-mechanics", (req, res) => {
+  if (req.session.role !== "user") {
+    return res.status(403).send("Forbidden");
+  }
+
+  const query = "SELECT * FROM Mechanics";
+  db.query(query, (err, mechanics) => {
+    if (err) {
+      console.error("Database error:", err);
+      return res.status(500).send("Internal Server Error");
+    }
+    // Ensure mechanics is an array
+    const mechanicsArray = Array.isArray(mechanics) ? mechanics : [];
+    res.render("view-mechanics", { mechanics: mechanicsArray });
+  });
+});
+
 // Mechanic Orders (Protected)
 appLogin.get("/mechanic-orders", isAuthenticated, (req, res) => {
   if (req.session.role !== "mechanic") {
@@ -442,10 +459,16 @@ appLogin.get("/mechanic", isAuthenticated, (req, res) => {
   db.query(query, (err, mechanics) => {
     if (err) {
       console.error("Database error:", err);
-      res.status(500).send("Internal Server Error");
-    } else {
-      res.render("mechanic", { mechanic: mechanics });
+      return res.status(500).send("Internal Server Error");
     }
+    db.query("Select * FROM services", (err, services) => {
+      if (err) {
+        console.error("Database error (Services):", err);
+        return res.status(500).send("Internal Server Error");
+      }
+      // console.log("Services data:", services);
+      res.render("mechanic", { mechanic: mechanics, services: services });
+    });
   });
 });
 
@@ -681,6 +704,62 @@ appLogin.get("/view-mechanic/:id", (req, res) => {
         res.render("mechanic-profile", { mechanic, certifications, reviews });
       });
     });
+  });
+});
+
+appLogin.get("/user-profile", isAuthenticated, (req, res) => {
+  if (req.session.role !== "user") {
+    return res.status(403).send("Forbidden");
+  }
+  const userId = req.session.userId;
+
+  const query = "SELECT user_id, email, name, phone_number FROM Users WHERE user_id = ?";
+  db.query(query, [userId], (err, results) => {
+    if (err) {
+      console.error("Database error fetching user profile:", err);
+      return res.status(500).send("Internal Server Error");
+    }
+    if (results.length === 0) {
+      // Should not happen if session is valid, but good practice
+      console.error("User not found for profile view:", userId);
+      req.session.destroy(); // Log out inconsistent user
+      return res.redirect("/");
+    }
+    res.render("user-profile", { user: results[0], message: req.query.message }); // Pass user data and optional message
+  });
+});
+
+appLogin.post("/user-profile/update", isAuthenticated, (req, res) => {
+  if (req.session.role !== "user") {
+    return res.status(403).send("Forbidden");
+  }
+  const userId = req.session.userId;
+  const { name, email, phone_number } = req.body;
+
+  // Basic validation
+  if (!name || !email || !phone_number) {
+    // More robust validation (e.g., email format) could be added here
+    return res.redirect("/user-profile?message=All fields are required.");
+  }
+
+  const query = "UPDATE Users SET name = ?, email = ?, phone_number = ? WHERE user_id = ?";
+  db.query(query, [name, email, phone_number, userId], (err, result) => {
+    if (err) {
+      console.error("Database error updating user profile:", err);
+      // Check for duplicate email error (MySQL error code 1062)
+      if (err.code === 'ER_DUP_ENTRY') {
+        return res.redirect("/user-profile?message=Email already in use.");
+      }
+      return res.redirect("/user-profile?message=Error updating profile.");
+    }
+
+    if (result.affectedRows === 0) {
+      console.error("User not found for profile update:", userId);
+      return res.redirect("/user-profile?message=User not found.");
+    }
+
+    console.log(`User profile updated for user_id: ${userId}`);
+    res.redirect("/user-profile?message=Profile updated successfully!"); // Redirect back with success message
   });
 });
 
