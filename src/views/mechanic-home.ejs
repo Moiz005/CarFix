@@ -4,77 +4,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mechanic Page</title>
+    <!-- Use mechanic's name in title if available -->
+    <title>Mechanic Dashboard<% if (typeof mechanic !== 'undefined' && mechanic.name) { %> - <%= mechanic.name %><% } %></title>
 
-    <!-- <link href="../../public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../public/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../../public/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../../public/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="../../public/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="../../public/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="../../public/vendor/simple-datatables/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../public/css/style1.css"> -->
-
-
+    <!-- Your CSS Links -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">  
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
     <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
     <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/vendor" rel="stylesheet">
-    <link href="/vendor" rel="stylesheet">
     <link href="/css/style1.css" rel="stylesheet">
 </head>
 
 <body class="mechanic">
-  <video
-      class="bg-vid"
-      src="/images/mechanic.mp4"
-      autoplay
-      loop
-      muted
-      plays-inline
-    ></video>
-  <div class="container">
-    <div class="row bar">
-      <div class="col-lg-4">
-        <div id="glass" class="side d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
-          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-            <span class="fs-4 link-light">Mechanic-home</span>
-          </a>
-          <hr>
-          <ul class="nav nav-pills flex-column mb-auto">
+    <video class="bg-vid" autoplay loop muted playsinline>
+        <source src="/images/mechanic.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Sidebar -->
+    <div class="sidebar d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+        <a href="/mechanic-home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-light text-decoration-none">
+             <!-- Display Mechanic Name in Sidebar Header -->
+             <span class="fs-4"><%= (typeof mechanic !== 'undefined' && mechanic.name) ? mechanic.name : 'Mechanic' %></span>
+        </a>
+        <hr style="border-color: rgba(255,255,255,0.5);">
+        <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-              <a href="/mechanic-home" class="nav-link link-light" aria-current="page">
-                Home
-              </a>
+                <a href="/mechanic-home" class="nav-link active link-light" aria-current="page"> <!-- Mark Home as active -->
+                    <i class="bi bi-house-door me-2"></i> Home
+                </a>
             </li>
-
             <li>
-              <a href="/mechanic-orders" class="nav-link link-light">appointments</a>
-              </a>
+                <a href="/mechanic-orders" class="nav-link link-light">
+                   <i class="bi bi-list-task me-2"></i> Appointments
+                </a>
             </li>
-            
-          </ul>
-          <hr>
-          <div class="dropdown">
-            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-              id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+            <li>
+                <a href="/edit-mechanic-profile" class="nav-link link-light">
+                   <i class="bi bi-person-gear me-2"></i>Profile
+                </a>
+            </li>
+        </ul>
+        <hr style="border-color: rgba(255,255,255,0.5);">
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                 <i class="bi bi-person-circle me-2"></i>
+                <strong><%= (typeof mechanic !== 'undefined' && mechanic.name) ? mechanic.name : 'Profile' %></strong>
             </a>
-            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-              <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Sign out</a></li>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
+                <!-- Add profile/settings links later if needed -->
+                <!-- <li><a class="dropdown-item" href="/mechanic-profile">Profile</a></li>
+                <li><hr class="dropdown-divider"></li> -->
+                <li><a class="dropdown-item" href="/logout">Sign out</a></li>
             </ul>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-</body>
+    <!-- /Sidebar -->
 
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+
+        <% if (typeof mechanic !== 'undefined') { %>
+            <div class="mechanic-home-container">
+                <h1>Welcome back, <%= mechanic.name %>!</h1>
+                <p>Here's a summary of your current activity.</p>
+                
+                <div class="row">
+                    <div class="col-md-6"> <!-- Adjust column size as needed -->
+                        <div class="dashboard-card">
+                            <h3>Current Appointments</h3>
+                            <p class="count">
+                                <% if (typeof appointmentCount !=='undefined' ) { %>
+                                    <%= appointmentCount %>
+                                        <% } else { %>
+                                            0
+                                            <% } %>
+                            </p>
+                            <!-- <a href="/mechanic-orders" class="btn btn-sm btn-outline-light">View Details</a> -->
+                        </div>
+                    </div>
+                    <!-- Add more cards here for other stats if needed -->
+                    <!-- <div class="col-md-6">
+                                     <div class="dashboard-card">
+                                        <h3>Completed This Week</h3>
+                                        <p class="count">5</p> Placeholder
+                                    </div>
+                                </div> -->
+                </div>
+            </div>
+        <% } else { %>
+            <div class="alert alert-danger" role="alert">
+              Could not load mechanic details. Please try logging out and back in.
+            </div>
+        <% } %>
+
+    </div>
+    <!-- /Main Content Area -->
+
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- Your other vendor JS files if needed -->
+    <!-- <script src="/vendor/....js"></script> -->
+
+</body>
 </html>

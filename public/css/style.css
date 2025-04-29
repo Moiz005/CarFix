@@ -51,7 +51,8 @@ body {
     align-items: center;
 }
 
-.user-profile-page nav {
+.user-profile-page nav,
+.view-mechanic-page nav {
   display: flex;
   align-items: center;
   position: absolute;
@@ -271,9 +272,19 @@ body {
   align-items: center;
 }
 
+.view-mechanic-container nav {
+  padding: 0px 1em;
+}
+
 .view-mechanic-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+  width: 30vw;
   color: azure;
-  padding: 1em;
+  padding: 1.5em;
+  border-radius: 1em;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.1),
@@ -283,6 +294,90 @@ body {
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.mechanic-profile-page .container .card {
+  color: azure;
+    padding: 1em;
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.appointment-card {
+  width: 30vw;
+  border-radius: 1em;
+  color: azure;
+    padding: 1em;
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.current-appointments {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.appointment-history-table {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+    overflow-x: auto;
+    padding: 1em;
+}
+
+.table-bg {
+  display: flex;
+  justify-content: center;
+  color: white;
+  overflow-x: auto;
+}
+
+.table-bg .table-hover tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.table-bg thead th {
+  color: #f0f0f0;
+}
+
+.table-bg tbody td {
+  color: white;
+  vertical-align: middle;
+}
+
+.table-bg tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  /* Subtle hover */
+}
+
+.table-bg tr {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em;
+  width: 30vw;
+}
+
+table.appointment-history-table>thead>tr,
+table.appointment-history-table>tbody>tr {
+  display: flex;
+  gap: 2em;
 }
 
 .profile-form {
@@ -371,9 +466,65 @@ body {
   padding: 10px;
   margin-top: 10px;
   text-decoration: none;
-  /* Remove underline from link styled as button */
   display: block;
-  /* Make link take full width */
   text-align: center;
-  /* Center text */
+}
+
+.btn-styling {
+  margin: 0.5em 0em;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+.badge-pending {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2em;
+  width: 8vw;
+  height: 5vh;
+  font-size: 0.8em;
+  font-weight: bold;
+  background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.2),
+        /* Slightly more opaque white */
+        rgba(255, 255, 255, 0.05)
+        /* More transparent */
+      );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.badge-pending:hover {
+  background-color: #b8ab65;
+}
+
+.btn-cancel {
+  /* background-color: #dc3545; */
+  color: white;
+  padding: 0.2em;
+  font-size: 0.8em;
+  font-weight: bold;
+  width: 10vw;
+  height: 5vh;
+  background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.2),
+        /* Slightly more opaque white */
+        rgba(255, 255, 255, 0.05)
+        /* More transparent */
+      );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-cancel:hover {
+  background-color: #9c212d;
 }

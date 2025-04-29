@@ -1,141 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Book an Appointment - Mechanic Booking System</title>
 
-    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
-    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-    <link href="/vendor/quill/quill.snow.css" rel="stylesheet" />
-    <link href="/vendor/quill/quill.bubble.css" rel="stylesheet" />
-    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet" />
-    <link href="/vendor/simple-datatables/style.css" rel="stylesheet" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= isReschedule ? 'Reschedule Appointment' : 'Book an Appointment' %> - CarFix
+  </title>
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
 
-    <link rel="stylesheet" href="/css/style.css" />
-  </head>
-  <body>
-    <video
-      class="bg-vid"
-      src="/images/car.mp4"
-      autoplay
-      loop
-      muted
-      plays-inline
-    ></video>
-    <section id="navbar">
-      <div class="nav">
-        <div>
-          <img src="/images/logo.png" alt="Logo" class="logo" />
-        </div>
-        <div class="mid">
-          <h2>Mechanic Booking System</h2>
-        </div>
-        <div class="right">
-          <a href="/user-home" class="btn btn-outline-light btn-sm"
-            >Back to Dashboard</a
-          >
-          <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
+<body>
+  <video class="bg-vid" src="/images/car.mp4" autoplay loop muted plays-inline></video>
+  <section id="navbar">
+    <div class="nav">
+      <div class="mid">
+        <h2>CarFix</h2>
+      </div>
+      <div class="right d-flex align-items-center">
+        <a href="/user-home" class="btn btn-outline-light btn-sm me-2">
+          Back to Dashboard
+        </a>
+        <div class="dropdown">
+          <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle"
+            id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="ri-user-line me-2"></i>
+            <%= user ? user.name : 'User' %>
+          </a>
+          <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+            <li><a class="dropdown-item" href="/user-profile">Profile</a></li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+          </ul>
         </div>
       </div>
-    </section>
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col text-center text-light">
-          <h1>BOOK AN APPOINTMENT</h1>
-        </div>
+    </div>
+  </section>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col text-center text-light">
+        <h1>
+          <%= isReschedule ? 'RESCHEDULE APPOINTMENT' : 'BOOK AN APPOINTMENT' %>
+        </h1>
       </div>
-      <div class="row">
-        <div class="col-md-10 mx-auto">
-          <div id="glass1" class="card mt-5 py-5">
-            <div class="card-body text-body-secondary">
-              <h2 class="card-title text-center mb-5 text-white-50">
-                FILL THE FORM TO CREATE A NEW APPOINTMENT
-              </h2>
-              <form class="p-0" method="POST" action="/book-appointments">
-                <div class="form-group row px-3 mb-3">
-                  <label class="col-sm-4 col-lg-2 col-form-label text-white-50"
-                    >Mechanic</label
-                  >
-                  <div class="col-sm-8 col-lg-10">
-                    <select
-                      class="form-control bg-light px-4 py-2 border-0"
-                      name="mechanic_id"
-                      required
-                    >
-                      <option value="">Select a mechanic...</option>
-                      <% mechanics.forEach(mechanic => { %>
-                      <option value="<%= mechanic.mechanic_id %>">
-                        <%= mechanic.name %> (<%= mechanic.location %>)
-                      </option>
-                      <% }) %>
-                    </select>
+    </div>
+    <div class="row">
+      <div class="col-md-10 mx-auto">
+        <div id="glass1" class="card mt-5 py-5">
+          <div class="card-body text-body-secondary">
+            <h2 class="card-title text-center mb-5 text-white-50">
+              <%= isReschedule ? 'UPDATE YOUR APPOINTMENT DETAILS' : 'FILL THE FORM TO CREATE A NEW APPOINTMENT' %>
+            </h2>
+            <form class="p-0" id="booking-form" method="POST"
+              action="<%= isReschedule ? '/booking/reschedule' : '/book-appointments' %>">
+              <% if (isReschedule) { %>
+                <input type="hidden" name="booking_id" value="<%= booking ? booking.booking_id : '' %>">
+                <% } %>
+                  <div class="form-group row px-3 mb-3">
+                    <label class="col-sm-4 col-lg-2 col-form-label text-white-50">Service</label>
+                    <div class="col-sm-8 col-lg-10">
+                      <select class="form-control bg-light px-4 py-2 border-0" name="service_id" id="service_id"
+                        required>
+                        <option value="">Select a service...</option>
+                        <% services.forEach(service=> { %>
+                          <option value="<%= service.service_id %>" data-cost="<%= service.estimated_cost %>"
+                            <%=isReschedule && booking && booking.service_id===service.service_id ? 'selected' : '' %>>
+                            <%= service.service_name %> - <%= service.service_type %> ($<%= service.estimated_cost %>)
+                          </option>
+                          <% }) %>
+                      </select>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group row px-3 mb-3">
-                  <label class="col-sm-4 col-lg-2 col-form-label text-white-50"
-                    >Service</label
-                  >
-                  <div class="col-sm-8 col-lg-10">
-                    <select
-                      class="form-control bg-light px-4 py-2 border-0"
-                      name="service_id"
-                    >
-                      <option value="">Select a service...</option>
-                      <% services.forEach(service => { %>
-                      <option value="<%= service.service_id %>">
-                        <%= service.service_name %> - <%= service.service_type
-                        %> ($<%= service.estimated_cost %>)
-                      </option>
-                      <% }) %>
-                    </select>
+                  <div class="form-group row px-3 mb-3">
+                    <label class="col-sm-4 col-lg-2 col-form-label text-white-50">Mechanic</label>
+                    <div class="col-sm-8 col-lg-10">
+                      <select class="form-control bg-light px-4 py-2 border-0" name="mechanic_id" id="mechanic_id"
+                        required>
+                        <option value="">Select a mechanic...</option>
+                        <% if (isReschedule && booking) { %>
+                          <option value="<%= booking.mechanic_id %>" selected>
+                            <%= booking.mechanic_name %> (<%= booking.location || 'Unknown' %>)
+                          </option>
+                          <% } else { %>
+                            <% mechanics.forEach(mechanic=> { %>
+                              <option value="<%= mechanic.mechanic_id %>">
+                                <%= mechanic.name %> (<%= mechanic.location %>)
+                              </option>
+                              <% }) %>
+                                <% } %>
+                      </select>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group row px-3 mb-3">
-                  <label class="col-sm-4 col-lg-2 col-form-label text-white-50"
-                    >Your Car</label
-                  >
-                  <div class="col-sm-8 col-lg-10">
-                    <select
-                      class="form-control bg-light px-4 py-2 border-0"
-                      name="car_id"
-                      required
-                    >
-                      <option value="">Select a car...</option>
-                      <% cars.forEach(car => { %>
-                      <option value="<%= car.car_id %>">
-                        <%= car.make %> <%= car.model %> (<%= car.year %>)
-                      </option>
-                      <% }) %>
-                    </select>
+                  <div class="form-group row px-3 mb-3">
+                    <label class="col-sm-4 col-lg-2 col-form-label text-white-50">Your Car</label>
+                    <div class="col-sm-8 col-lg-10">
+                      <select class="form-control bg-light px-4 py-2 border-0" name="car_id" id="car_id" required>
+                        <option value="">Select a car...</option>
+                        <% cars.forEach(car=> { %>
+                          <option value="<%= car.car_id %>" <%=isReschedule && booking && booking.car_id===car.car_id
+                            ? 'selected' : '' %>>
+                            <%= car.make %>
+                              <%= car.model %> (<%= car.year %>)
+                          </option>
+                          <% }) %>
+                      </select>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group row px-3 mb-3">
-                  <label class="col-sm-4 col-lg-2 col-form-label text-white-50"
-                    >Date & Time</label
-                  >
-                  <div class="col-sm-8 col-lg-10">
-                    <input
-                      type="datetime-local"
-                      class="form-control bg-light px-4 py-2 border-0"
-                      name="booking_date_time"
-                      required
-                    />
+                  <div class="form-group row px-3 mb-3">
+                    <label class="col-sm-4 col-lg-2 col-form-label text-white-50">Date & Time</label>
+                    <div class="col-sm-8 col-lg-10">
+                      <input type="datetime-local" class="form-control bg-light px-4 py-2 border-0"
+                        name="booking_date_time" id="booking_date_time"
+                        value="<%= isReschedule && booking ? new Date(booking.booking_date_time).toISOString().slice(0, 16) : '' %>"
+                        required />
+                    </div>
                   </div>
-                </div>
-                <div class="text-center">
-                  <input
-                    type="submit"
-                    class="fl fl-btn p-2 btn btn-dark btn-block"
-                    value="Book Appointment"
-                  />
-                </div>
-              </form>
-            </div>
+                  <% if (!isReschedule) { %>
+                    <div class="form-group row px-3 mb-3">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-white-50">Payment</label>
+                      <div class="col-sm-8 col-lg-10">
+                        <div id="card-element" class="form-control bg-light px-4 py-2 border-0"></div>
+                        <small class="text-white-50">Use test card: 4242 4242 4242 4242, any future date, any
+                          CVC</small>
+                        <div id="card-errors" class="text-danger mt-2"></div>
+                      </div>
+                    </div>
+                    <% } %>
+                      <div class="text-center">
+                        <button type="submit" class="fl fl-btn p-2 btn btn-dark btn-block" id="submit-button">
+                          <%= isReschedule ? 'Reschedule Appointment' : 'Pay and Book Appointment' %>
+                        </button>
+                      </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    const stripe = Stripe('pk_test_51Q2qF5SHuI1Q2mXa8mC6V7uXjZ4nX5kYvL3qW8mP9tR2hJ4kD5fG7iH8jK9lL0mN1oP2qR3sT4uV5wX6yZ7aB8cD'); // Replace with your actual Stripe test publishable key
+    const elements = stripe.elements();
+    const card = elements.create('card', { style: { base: { fontSize: '16px', color: '#32325d' } } });
+    card.mount('#card-element');
+
+    const form = document.getElementById('booking-form');
+    const cardErrors = document.getElementById('card-errors');
+    const submitButton = document.getElementById('submit-button');
+
+    document.getElementById('service_id').addEventListener('change', async function () {
+      const serviceId = this.value;
+      const mechanicSelect = document.getElementById('mechanic_id');
+
+      mechanicSelect.innerHTML = '<option value="">Select a mechanic...</option>';
+
+      if (serviceId) {
+        try {
+          const response = await fetch(`/booking/mechanics-by-service/${serviceId}`);
+          if (!response.ok) throw new Error('Network response was not ok');
+          const mechanics = await response.json();
+
+          mechanics.forEach(mechanic => {
+            const option = document.createElement('option');
+            option.value = mechanic.mechanic_id;
+            option.textContent = `${mechanic.name} (${mechanic.location})`;
+            mechanicSelect.appendChild(option);
+          });
+        } catch (error) {
+          console.error('Error fetching mechanics:', error);
+          mechanicSelect.innerHTML = '<option value="">Error loading mechanics</option>';
+        }
+      }
+
+      <% if (isReschedule && booking && booking.mechanic_id) { %>
+        const preselectedMechanicId = '<%= booking.mechanic_id %>';
+        if (mechanicSelect.querySelector(`option[value="${preselectedMechanicId}"]`)) {
+          mechanicSelect.value = preselectedMechanicId;
+        }
+      <% } %>
+    });
+
+    <% if (isReschedule) { %>
+      document.getElementById('service_id').dispatchEvent(new Event('change'));
+    <% } %>
+
+    <% if (!isReschedule) { %>
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        submitButton.disabled = true;
+        cardErrors.textContent = '';
+
+        const serviceId = document.getElementById('service_id').value;
+        const selectedOption = document.getElementById('service_id').querySelector(`option[value="${serviceId}"]`);
+        const amount = parseFloat(selectedOption.dataset.cost) * 100; // Convert to cents
+
+        try {
+          // Create Payment Intent
+          const response = await fetch('/booking/create-payment-intent', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount, currency: 'usd' })
+          });
+          if (!response.ok) throw new Error('Failed to create Payment Intent');
+          const { clientSecret } = await response.json();
+
+          // Confirm card payment
+          const result = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: { card }
+          });
+
+          if (result.error) {
+            cardErrors.textContent = result.error.message;
+            submitButton.disabled = false;
+            return;
+          }
+
+          // Add clientSecret to form for backend verification
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'client_secret';
+          input.value = clientSecret;
+          form.appendChild(input);
+
+          // Submit the form
+          form.submit();
+        } catch (error) {
+          console.error('Payment error:', error);
+          cardErrors.textContent = 'Payment failed. Please try again.';
+          submitButton.disabled = false;
+        }
+      });
+    <% } %>
+  </script>
+</body>
+
 </html>

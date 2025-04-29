@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+
+    <!-- CSS Links -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/css/style1.css" rel="stylesheet">
+</head>
+
+<body> <!-- Removed specific body class -->
+    <video class="bg-vid" src="/images/mechanic.mp4" autoplay loop muted playsinline></video>
+
+    <!-- Sidebar (Consistent) -->
+    <div class="sidebar d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+        <a href="/mechanic-home"
+            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-light text-decoration-none">
+            <span class="fs-4">Mechanic Menu</span>
+        </a>
+        <hr style="border-color: rgba(255,255,255,0.5);">
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item"><a href="/mechanic-home" class="nav-link link-light"><i
+                        class="bi bi-house-door me-2"></i> Home</a></li>
+            <li><a href="/mechanic-orders" class="nav-link link-light"><i class="bi bi-list-task me-2"></i>
+                    Appointments</a></li>
+            <!-- Add active class to profile link -->
+            <li><a href="/edit-mechanic-profile" class="nav-link active link-light"><i
+                        class="bi bi-person-gear me-2"></i>Profile</a></li>
+        </ul>
+        <hr style="border-color: rgba(255,255,255,0.5);">
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle"
+                id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle me-2"></i><strong>Profile</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
+                <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /Sidebar -->
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+
+        <div class="form-glass-container">
+            <h2>Edit Your Profile</h2>
+
+            <!-- Display Feedback Messages -->
+            <% if (typeof message !=='undefined' && message) { %>
+                <div class="alert <%= message.includes('successfully') ? 'alert-success' : 'alert-danger' %> alert-dismissible fade show"
+                    role="alert">
+                    <%= message %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <% } %>
+
+                    <% if (typeof mechanic !=='undefined' && mechanic) { %>
+                        <form action="/edit-mechanic-profile/update" method="POST">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    value="<%= mechanic.name %>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    value="<%= mechanic.email %>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone_number" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone_number" name="phone_number"
+                                    value="<%= mechanic.phone_number %>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="location" class="form-label">Location / Area Served</label>
+                                <input type="text" class="form-control" id="location" name="location"
+                                    value="<%= mechanic.location %>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="experience_years" class="form-label">Years of Experience</label>
+                                <input type="number" class="form-control" id="experience_years" name="experience_years"
+                                    value="<%= mechanic.experience_years %>" min="0" required>
+                            </div>
+                            <div class="btn-container">
+                                <button type="submit" class="btn btn-update">Update Profile</button>
+                            </div>
+                        </form>
+                        <% } else { %>
+                            <div class="alert alert-warning" role="alert">
+                                Could not load profile data. Please try again later or contact support.
+                                <a href="/mechanic-home" class="alert-link">Go back to Dashboard</a>.
+                            </div>
+                            <% } %>
+
+        </div> <!-- /form-glass-container -->
+
+    </div>
+    <!-- /Main Content Area -->
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

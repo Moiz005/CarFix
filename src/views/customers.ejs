@@ -4,16 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Page</title>
-
-    <!-- <link href="../../public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../public/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../../public/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../../public/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="../../public/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="../../public/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="../../public/vendor/simple-datatables/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../public/css/style1.css"> -->
-
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
     <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
@@ -26,7 +16,6 @@
   </head>
 
   <body class="customer">
-    <!-- <video class="bg-vid" src="../../public/images/vid.mp4" autoplay loop muted plays-inline></video> -->
     <video
       class="bg-vid"
       src="/images/mechanic.mp4"
@@ -36,46 +25,56 @@
       plays-inline
     ></video>
     <div class="customer-container">
-      <div class="row bar">
-        <div class="col-lg-4">
-          <div
-            id="glass"
-            class="side d-flex flex-column flex-shrink-0 p-3"
-            style="width: 280px"
-          >
-            <a
-              href="/"
-              class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
-            >
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-3 col-md-4">
+          <div id="glass" class="side d-flex flex-column flex-shrink-0 p-3" style="min-height: 100vh; width: 280px">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
               <span class="fs-4 link-light">ADMIN</span>
             </a>
-            <hr />
+            <hr class="text-white" />
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
-                <a
-                  href="/admin"
-                  class="nav-link link-light"
-                  aria-current="page"
-                >
-                  Home
+                <a href="/admin" class="nav-link link-light" aria-current="page">
+                  <i class="bi bi-house-door me-2"></i>Home
                 </a>
               </li>
               <li>
-                <a href="/orders" class="nav-link link-light">Appointments</a>
+                <a href="/orders" class="nav-link link-light">
+                  <i class="bi bi-calendar-check me-2"></i>Appointments
+                </a>
               </li>
               <li>
-                <a href="/Service" class="nav-link link-light">Services</a>
+                <a href="/Service" class="nav-link link-light">
+                  <i class="bi bi-tools me-2"></i>Services
+                </a>
               </li>
               <li>
-                <a href="/mechanic" class="nav-link link-light">Mechanics</a>
+                <a href="/add-mechanic" class="nav-link link-light">
+                  <i class="bi bi-person-gear me-2"></i>Add Mechanics
+                </a>
               </li>
               <li>
-                <a href="/customers" class="nav-link link-light active"
-                  >Customers</a
-                >
+                <a href="/mechanic" class="nav-link link-light">
+                  <i class="bi bi-people me-2"></i>View Mechanics
+                </a>
+              </li>
+              <li>
+                <a href="/customers" class="nav-link link-light active">
+                  <i class="bi bi-people me-2"></i>Customers
+                </a>
               </li>
             </ul>
-            <hr />
+            <hr class="text-white" />
+            <div class="dropdown">
+              <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle" id="dropdownUser2"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="ri-user-line me-2"></i>Admin
+              </a>
+              <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+              </ul>
+            </div>
           </div>
         </div>
         <div id="glass1" class="col-lg-8 text-white">
@@ -106,4 +105,5 @@
       </div>
     </div>
   </body>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </html>

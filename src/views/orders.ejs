@@ -1,109 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders Page</title>
-    
-    <!-- <link href="../../public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../public/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../../public/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../../public/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="../../public/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="../../public/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="../../public/vendor/simple-datatables/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../public/css/style1.css"> -->
-
 
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">  
-    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/vendor" rel="stylesheet">
-    <link href="/vendor" rel="stylesheet">
-    
     <link href="/css/style1.css" rel="stylesheet">
-    <style>
-        .table1 {
-            background-color: transparent !important;
-        }
-    </style>
 </head>
+
 <body class="order">
-    <video class="bg-vid" src="/images/mechanic.mp4" autoplay loop muted plays-inline></video>
-    <div class="container">
-        <div class="row bar">
-            <div class="col-lg-4">
-                <div id="glass3" class="side d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
-                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+    <video class="bg-vid" src="/images/mechanic.mp4" autoplay loop muted playsinline></video>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-md-4">
+                <div id="glass" class="side d-flex flex-column flex-shrink-0 p-3"
+                    style="min-height: 100vh; width: 280px">
+                    <a href="/"
+                        class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                         <span class="fs-4 link-light">ADMIN</span>
-                      </a>
-                      <hr>
+                    </a>
+                    <hr class="text-white" />
                     <ul class="nav nav-pills flex-column mb-auto">
                         <li class="nav-item">
-                            <a href="/admin" class="nav-link link-light" aria-current="page">
-                                Home
+                            <a href="/admin" class="nav-link link-light">
+                                <i class="bi bi-house-door me-2"></i>Home
                             </a>
                         </li>
                         <li>
-                            <a href="/orders" class="nav-link link-light active">Appointments</a>   
+                            <a href="/orders" class="nav-link link-light active">
+                                <i class="bi bi-calendar-check me-2"></i>Appointments
+                            </a>
                         </li>
                         <li>
-                            <a href="/Service" class="nav-link link-light">Services</a>   
+                            <a href="/Service" class="nav-link link-light">
+                                <i class="bi bi-tools me-2"></i>Services
+                            </a>
                         </li>
                         <li>
-                            <a href="/mechanic" class="nav-link link-light">Mechanics</a>   
+                            <a href="/add-mechanic" class="nav-link link-light">
+                                <i class="bi bi-person-gear me-2"></i>Add Mechanics
+                            </a>
                         </li>
                         <li>
-                            <a href="/customers" class="nav-link link-light">Customers</a>
+                            <a href="/mechanic" class="nav-link link-light">
+                                <i class="bi bi-people me-2"></i>View Mechanics
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/customers" class="nav-link link-light">
+                                <i class="bi bi-people me-2"></i>Customers
+                            </a>
                         </li>
                     </ul>
-                    <hr>
+                    <hr class="text-white" />
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle"
+                            id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="ri-user-line me-2"></i>Admin
+                        </a>
+                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                            <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-8">
-                <section class="section dashboard">
-                    <h1 class="text-white">Appointments</h1>
-
-                    
-                    <table id="glass5">
-                        <thead>
-                                    <tr>
-                                        <th>Booking ID</th>
-                                        <th>Customer Name</th>
-                                        <th>Appointment Date</th>
-                                        <th>Appointment Time</th>
-                                        <th>Mechanic</th> <!-- New column for mechanic -->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <% orders.forEach((order) => { %>
+            <!-- Main Content -->
+            <div class="col-lg-9 col-md-8 p-4">
+                <div id="glass1" class="p-4 rounded">
+                    <h1 class="text-white mb-4">Appointments</h1>
+                    <% if (message) { %>
+                        <div class="alert alert-info">
+                            <%= message %>
+                        </div>
+                        <% } %>
+                            <% if (orders && orders.length> 0) { %>
+                                <table class="table table-hover text-white">
+                                    <thead>
                                         <tr>
-                                            <td><%= order.id %></td>
-                                            <td><%= order.owner_name %></td>
-                                            <td><%= new Date(order.appointment_date).toLocaleDateString() %></td>
-                                            <td><%= new Date(order.appointment_date).toLocaleTimeString() %></td>
-                                            <td>
-                                                <!-- Form for assigning a mechanic to an order -->
-                                                <form id="mechanicForm<%= order.id %>" action="/assign-mechanic" method="post">
-                                                    <input type="hidden" name="order_id" value="<%= order.id %>">
-                                                    <!-- Dropdown menu for selecting the mechanic -->
-                                                    <select name="mechanic_id" class="form-control">
-                                                        <% mechanics.forEach((mechanic) => { %>
-                                                            <option value="<%= mechanic.mechanic_id %>"><%= mechanic.name %></option>
-                                                        <% }); %>
-                                                    </select>
-                                                    <button type="submit" class="btn btn-primary btn-sm">Assign</button>
-                                                </form>
-                                            </td>
+                                            <th>Booking ID</th>
+                                            <th>User ID</th>
+                                            <th>Appointment Date</th>
+                                            <th>Appointment Time</th>
+                                            <th>Mechanic</th>
                                         </tr>
-                                    <% }); %>
-                                </tbody>
-                    </table>      
-                </section>
+                                    </thead>
+                                    <tbody>
+                                        <% orders.forEach((order)=> { %>
+                                            <% const dateTime=new Date(order.booking_date_time); const
+                                                dateFormatted=dateTime.toLocaleDateString(undefined, { year: 'numeric' ,
+                                                month: 'short' , day: 'numeric' }); const
+                                                timeFormatted=dateTime.toLocaleTimeString(undefined, { hour: 'numeric' ,
+                                                minute: '2-digit' , hour12: true }); %>
+                                                <tr>
+                                                    <td>
+                                                        <%= order.booking_id %>
+                                                    </td>
+                                                    <td>
+                                                        <%= order.user_id %>
+                                                    </td>
+                                                    <td>
+                                                        <%= dateFormatted %>
+                                                    </td>
+                                                    <td>
+                                                        <%= timeFormatted %>
+                                                    </td>
+                                                    <td>
+                                                        <form action="/assign-mechanic" method="post">
+                                                            <input type="hidden" name="booking_id"
+                                                                value="<%= order.booking_id %>">
+                                                            <select name="mechanic_id"
+                                                                class="form-control d-inline-block w-auto">
+                                                                <option value="">Select Mechanic</option>
+                                                                <% if (mechanics && mechanics.length> 0) { %>
+                                                                    <% mechanics.forEach((mechanic)=> { %>
+                                                                        <option value="<%= mechanic.mechanic_id %>"
+                                                                            <%=order.mechanic_id===mechanic.mechanic_id
+                                                                            ? 'selected' : '' %>>
+                                                                            <%= mechanic.name %>
+                                                                        </option>
+                                                                        <% }); %>
+                                                                            <% } else { %>
+                                                                                <option value="">No Mechanics Available
+                                                                                </option>
+                                                                                <% } %>
+                                                            </select>
+                                                            <button type="submit"
+                                                                class="btn btn-primary btn-sm">Assign</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                <% }); %>
+                                    </tbody>
+                                </table>
+                                <% } else { %>
+                                    <p class="text-white text-center mt-3">No appointments available.</p>
+                                    <% } %>
+                </div>
             </div>
+        </div>
+    </div>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
 
+</html>

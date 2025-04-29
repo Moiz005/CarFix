@@ -99,10 +99,10 @@ li a:hover {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 #glass5 {
-  height: 20rem;
-  width: 50rem;
+  height: 20em;
+  width: 50em;
   color: azure;
-  padding: 10px;
+  padding: 1em;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.1),
@@ -114,7 +114,16 @@ li a:hover {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
+#glass5 tr {
+  padding: 0.5em 0.5em;
+  display: flex;
+  justify-content: space-between;
+}
+
 table.mechanic-table {
+  margin: 1em 0em;
+    display: flex;
+    flex-direction: column;
   color: azure;
   padding: 1em !important;
   background: linear-gradient(
@@ -126,14 +135,235 @@ table.mechanic-table {
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  margin: 1em 0em;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
 }
 
 table.mechanic-table > thead > tr,
 table.mechanic-table > tbody > tr {
   display: flex;
+  justify-content: space-between;
+}
+
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0px;
+  padding: 20px;
+  color: white;
+  z-index: 1;
+  position: relative;
+}
+
+.mechanic-home-container {
+  text-align: center;
+  padding: 1.5em;
+  border-radius: 1em;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.mechanic .main-content .mechanic-home-container .row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0px;
+}
+
+.sidebar {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+body.order {
+  padding: 0px;
+  margin: 0px;
+  /* padding-left: 280px; */
+  overflow-x: hidden;
+}
+
+.table-glass {
+  /* Apply glass effect to table container */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  overflow-x: auto;
+  /* Allow horizontal scroll on smaller screens */
+}
+
+.table-glass .table-hover tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  /* Subtle hover */
+  color: white;
+  /* Ensure text stays white on hover */
+}
+
+.table-glass thead th {
+  color: #f0f0f0;
+}
+
+.table-glass tbody td {
+  color: white;
+  vertical-align: middle;
+}
+
+.table-glass tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  /* Subtle hover */
+}
+
+.table-glass tr {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em;
+}
+
+/* Status Badges */
+.badge {
+  padding: 0.4em 0.6em;
+  font-size: 0.85em;
+  border-radius: 0.25rem;
+}
+
+.badge-pending {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.badge-confirmed {
+  background-color: #198754;
+  color: white;
+}
+
+.badge-completed {
+  background-color: #0dcaf0;
+  color: #333;
+}
+
+.badge-canceled {
+  background-color: #6c757d;
+  color: white;
+}
+
+.badge-unknown {
+  background-color: #adb5bd;
+  color: #333;
+}
+
+.mechanic-orders-table {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+    overflow-x: auto;
+    padding: 1em;
+}
+
+table.mechanic-orders-table>thead>tr,
+table.mechanic-orders-table>tbody>tr {
+  display: flex;
   gap: 1em;
+}
+
+.form-glass-container {
+  width: 30em;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 10px;
+  color: white;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.form-glass-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.form-glass-container .form-label {
+  font-weight: 500;
+  color: #e0e0e0;
+  /* Lighter label color */
+}
+
+.form-glass-container .form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.form-glass-container .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form-glass-container .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: white;
+  box-shadow: none;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-update {
+  /* Custom button style */
+  background-color: #198754;
+  /* Green */
+  border-color: #198754;
+  color: white;
+}
+
+.btn-update:hover {
+  background-color: #157347;
+  border-color: #146c43;
+}
+
+.btn-back {
+  background-color: #6c757d;
+  /* Gray */
+  border-color: #6c757d;
+  color: white;
+  text-decoration: none;
+  padding: .375rem .75rem;
+  /* Match btn padding */
+  font-size: 1rem;
+  /* Match btn font-size */
+  border-radius: .25rem;
+  /* Match btn border-radius */
+  display: inline-block;
+}
+
+.btn-back:hover {
+  background-color: #5c636a;
+  border-color: #565e64;
+  color: white;
 }

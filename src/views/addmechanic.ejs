@@ -58,11 +58,16 @@
               </li>
               <li>
                 <a
-                  href="/mechanic"
+                  href="/add-mechanic"
                   class="nav-link link-light active"
                   aria-current="page"
                 >
-                  <i class="bi bi-person-gear me-2"></i>Mechanics
+                  <i class="bi bi-person-gear me-2"></i>Add Mechanics
+                </a>
+              </li>
+              <li>
+                <a href="/mechanic" class="nav-link link-light">
+                  <i class="bi bi-people me-2"></i>View Mechanics
                 </a>
               </li>
               <li>
@@ -194,7 +199,19 @@
                   >
                 </div>
               </div>
-
+              <div class="row">
+                <div class="col-md-12 mb-3">
+                  <label for="service_ids" class="form-label text-white">Services</label>
+                  <select class="form-control" id="service_ids" name="service_ids" multiple required>
+                    <% services.forEach(service=> { %>
+                      <option value="<%= service.service_id %>">
+                        <%= service.service_name %>
+                      </option>
+                      <% }) %>
+                  </select>
+                  <small class="text-white">Hold Ctrl (or Cmd) to select multiple services</small>
+                </div>
+              </div>
               <!-- Submit Button -->
               <div class="mt-4">
                 <button type="submit" class="btn btn-primary">

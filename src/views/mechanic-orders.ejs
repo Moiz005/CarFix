@@ -3,95 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mechanic-orders Page</title>
-    
-    <!-- <link href="../../public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../public/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../../public/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../../public/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="../../public/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="../../public/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="../../public/vendor/simple-datatables/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../public/css/style1.css"> -->
+    <title>My Appointments</title> <!-- More specific title -->
 
-
+    <!-- CSS Links (Ensure paths are correct) -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">  
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
     <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
     <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/vendor" rel="stylesheet">
-    <link href="/vendor" rel="stylesheet">
     <link href="/css/style1.css" rel="stylesheet">
-</head>
-<body class="order">
-    <!-- <video class="bg-vid" src="../../public/images/vid.mp4" autoplay loop muted plays-inline></video> -->
-    <video
-    class="bg-vid"
-    src="/images/mechanic.mp4"
-    autoplay
-    loop
-    muted
-    plays-inline
-  ></video>
-    <!-- <video class="bg-vid" src="/images/vid.mp4" autoplay loop muted plays-inline></video> -->
-    <div class="container">
-        <div class="row bar">
-            <div class="col-lg-4">
-                <div id="glass3" class="side d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
-                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                        <span class="fs-4 link-light">Mechanic</span>
-                      </a>
-                      <hr>
-                    <ul class="nav nav-pills flex-column mb-auto">
-                        <li class="nav-item">
-                            <a href="/mechanic-home" class="nav-link link-light" aria-current="page">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/mechanic-orderss" class="nav-link link-light">Appointments</a>   
-                        </li>
-                    </ul>
-                    <hr>
-                </div>
-            </div>
-            
-            <div class="col-lg-8">
-                <section class="section dashboard">
-                    <h1 class="text-white">Appointments</h1>
 
-                    <div class="search-form">
-                      <form id="searchForm" action="/search-appointments" method="get">
-                          <input type="text" name="mechanic_id" placeholder="Enter Mechanic ID" required>
-                          <button type="submit" class="btn btn-primary">Search</button>
-                      </form>
-                  </div>
-          
-                     <table class="table table-striped">
-                        <thead>
-                                    <tr>
-                                        <th>Booking ID</th>
-                                        <th>Customer Name</th>
-                                        <th>Appointment Date</th>
-                                        <th>Appointment Time</th>
-                                       
-                                     </tr>
-                                </thead>
-                                <tbody> 
-                                  <% orders.forEach((order) => { %>
-                                        <tr>
-                                            <td><%= order.id %></td>
-                                            <td><%= order.owner_name %></td>
-                                            <td><%= new Date(order.appointment_date).toLocaleDateString() %></td>
-                                            <td><%= new Date(order.appointment_date).toLocaleTimeString() %></td>
-                                        </tr>
-                                    <% }); %>
-                                </tbody>
-                    </table>       
-                </section>
-            </div>
+    <!-- <style>
+        /* Reuse styles from mechanic-home for consistency */
+        .main-content {
+            margin-left: 300px; /* Adjust based on sidebar width */
+            padding: 20px;
+            color: white;
+            z-index: 1;
+            position: relative;
+        }
+        .sidebar {
+             height: 100vh;
+             position: fixed;
+             top: 0;
+             left: 0;
+             z-index: 2;
+             background: linear-gradient( 135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) );
+             backdrop-filter: blur(10px);
+             -webkit-backdrop-filter: blur(10px);
+             border-right: 1px solid rgba(255, 255, 255, 0.18);
+             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        body.order { /* Use a specific class for this page's body */
+            padding-left: 280px; /* Match sidebar width */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+         .bg-vid {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            background-size: cover;
+         }
+         .table-glass { /* Apply glass effect to table container */
+            background: linear-gradient( 135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05) );
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
+            overflow-x: auto; /* Allow horizontal scroll on smaller screens */
+         }
+         .table-glass thead th {
+             color: #f0f0f0; /* Lighter header text */
+             border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+         }
+         .table-glass tbody td {
+             color: white;
+             vertical-align: middle;
+             border-top: 1px solid rgba(255, 255, 255, 0.2);
+         }
+         .table-glass tbody tr:hover {
+             background-color: rgba(255, 255, 255, 0.08); /* Subtle hover */
+         }
+         /* Status Badges */
+        .badge {
+            padding: 0.4em 0.6em;
+            font-size: 0.85em;
+            border-radius: 0.25rem;
+        }
+        .badge-pending { background-color: #ffc107; color: #333; }
+        .badge-confirmed { background-color: #198754; color: white; }
+        .badge-completed { background-color: #0dcaf0; color: #333; }
+        .badge-canceled { background-color: #6c757d; color: white; }
+        .badge-unknown { background-color: #adb5bd; color: #333;}
+
+    </style> -->
+</head>
+<body class="order"> <!-- Use the body class for specific padding -->
+    <video class="bg-vid" src="/images/mechanic.mp4" autoplay loop muted playsinline></video>
+
+    <!-- Sidebar (Consistent with mechanic-home) -->
+    <div class="sidebar d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+        <a href="/mechanic-home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-light text-decoration-none">
+            <span class="fs-4">Mechanic Menu</span> <!-- Generic or pass mechanic name -->
+        </a>
+        <hr style="border-color: rgba(255,255,255,0.5);">
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="/mechanic-home" class="nav-link link-light" aria-current="page">
+                    <i class="bi bi-house-door me-2"></i> Home
+                </a>
+            </li>
+            <li>
+                <!-- Corrected link and added active class -->
+                <a href="/mechanic-orders" class="nav-link active link-light">
+                   <i class="bi bi-list-task me-2"></i> Appointments
+                </a>
+            </li>
+            <li>
+                <a href="/edit-mechanic-profile" class="nav-link link-light">
+                    <i class="bi bi-person-gear me-2"></i>Profile
+                </a>
+            </li>
+        </ul>
+        <hr style="border-color: rgba(255,255,255,0.5);">
+        <!-- Bottom dropdown -->
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                 <i class="bi bi-person-circle me-2"></i>
+                <strong><%= (typeof mechanic !== 'undefined' && mechanic.name) ? mechanic.name : 'Profile' %></strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
+                <!-- Add profile/settings links later if needed -->
+                <!-- <li><a class="dropdown-item" href="/mechanic-profile">Profile</a></li>
+                <li><hr class="dropdown-divider"></li> -->
+                <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /Sidebar -->
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <h1 class="mb-4">My Appointments</h1>
+
+        <!-- Removed the incorrect search form -->
+
+        <div class="table-glass"> <!-- Apply glass effect -->
+            <% if (typeof orders !== 'undefined' && orders.length > 0) { %>
+                <table class="table-hover mechanic-orders-table"> <!-- Use table-borderless inside glass -->
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Contact</th>
+                            <th>Service</th>
+                            <th>Car</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% orders.forEach((order) => { %>
+                            <%
+                                // Helper for status badge class
+                                let statusClass = 'badge-unknown';
+                                if (order.status === 'pending') statusClass = 'badge-pending';
+                                else if (order.status === 'confirmed') statusClass = 'badge-confirmed';
+                                else if (order.status === 'completed') statusClass = 'badge-completed';
+                                else if (order.status === 'canceled') statusClass = 'badge-canceled';
+
+                                // Format Date and Time
+                                const dateTime = new Date(order.booking_date_time);
+                                const dateFormatted = dateTime.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+                                const timeFormatted = dateTime.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit', hour12: true });
+                            %>
+                            <tr>
+                                <td><%= order.booking_id %></td>
+                                <td><%= order.customer_name || 'N/A' %></td>
+                                <td><%= order.customer_phone || 'N/A' %></td>
+                                <td><%= order.service_name || 'N/A' %></td>
+                                <td><%= order.car_make ? `${order.car_make} ${order.car_model} (${order.car_year || 'N/A'})` : 'N/A' %></td>
+                                <td><%= dateFormatted %></td>
+                                <td><%= timeFormatted %></td>
+                                <td>
+                                    <span class="badge <%= statusClass %>"><%= order.status %></span>
+                                </td>
+                                
+                                <td class="action-cell text-center">
+                                    <% if (order.status === 'pending') { %>
+                                        <form action="/mechanic/complete-order" method="POST" style="display: inline;">
+                                            <input type="hidden" name="booking_id" value="<%= order.booking_id %>">
+                                            <button type="submit" class="btn btn-success btn-sm" title="Mark as Completed">
+                                                <i class="bi bi-check-lg"></i> Complete
+                                            </button>
+                                        </form>
+                                    <% } else if (order.status === 'confirmed') { %>
+                                         <span class="text-muted small">Confirmed</span>
+                                    <% } else { %>
+                                        <span class="text-muted small">-</span>
+                                    <% } %>
+                                    <!-- Add other buttons like 'View Details' if needed -->
+                                    <!-- <a href="/mechanic/order-details/<%= order.booking_id %>" class="btn btn-info btn-sm ms-1" title="View Details"><i class="bi bi-eye"></i></a> -->
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            <% } else { %>
+                <p class="text-center mt-3">You currently have no appointments assigned.</p>
+            <% } %>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
-
